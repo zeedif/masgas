@@ -87,12 +87,11 @@ function App() {
     if (editingProduct) {
       updateProduct(editingProduct.id, product).then((isUpdated) => {
         if (isUpdated) {
-          const updatedProduct = {...editingProduct, ...product};
-          setProducts(
-            products.map((p) =>
-              p.id === editingProduct.id ? updatedProduct : p
-            )
-          );
+          getListProduct().then((data) => {
+            if (data) {
+              setProducts(data);
+            }
+          });
         }
       });
     }
@@ -118,6 +117,7 @@ function App() {
                 name="name"
                 type="text"
                 placeholder="Nombre del producto"
+                defaultValue={editingProduct ? editingProduct.name : ""}
               />
             </div>
             <div className="w-full px-3">
@@ -125,6 +125,7 @@ function App() {
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 name="description"
                 placeholder="Descripción del producto"
+                defaultValue={editingProduct ? editingProduct.description : ""}
               />
             </div>
             <div className="w-full px-3">
@@ -133,6 +134,7 @@ function App() {
                 name="imageUrl"
                 type="text"
                 placeholder="URL de la imagen del producto"
+                defaultValue={editingProduct ? editingProduct.imageUrl : ""}
               />
             </div>
             <div className="w-full px-3">
@@ -141,6 +143,7 @@ function App() {
                 name="price"
                 type="number"
                 placeholder="Precio del producto"
+                defaultValue={editingProduct ? editingProduct.price : ""}
               />
             </div>
             <div className="w-full px-3">
@@ -149,6 +152,7 @@ function App() {
                 name="stock"
                 type="number"
                 placeholder="Stock del producto"
+                defaultValue={editingProduct ? editingProduct.stock : ""}
               />
             </div>
             <div className="w-full px-3">
