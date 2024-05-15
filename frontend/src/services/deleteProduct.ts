@@ -9,7 +9,6 @@ export const deleteProduct = async (id: number): Promise<boolean> => {
     return true;
   }
 
-  // Solo intenta analizar la respuesta si no está vacía
   if (response.status !== 204) {
     const data = await response.json();
     console.error(data.error);

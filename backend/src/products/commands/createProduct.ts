@@ -20,12 +20,11 @@ export async function createProduct(
     });
 
     res.status(201).json(product.id);
-    console.log(`Product created with id: ${product.id}\n${product}`);
-    prisma.$disconnect();
+    await prisma.$disconnect();
   } catch (error) {
     res
       .status(500)
       .json({error: "An error occurred while creating the product"});
-    prisma.$disconnect();
+    await prisma.$disconnect();
   }
 }
